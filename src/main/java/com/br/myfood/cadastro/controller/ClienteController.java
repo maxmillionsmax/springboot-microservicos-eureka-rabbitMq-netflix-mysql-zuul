@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @RequestMapping("/client")
 @RestController
@@ -47,6 +48,15 @@ public class ClienteController {
         return clienteService.deleteClient(id) ?
                 ResponseEntity.ok().build() :
                 ResponseEntity.notFound().build();
+    }
+    @GetMapping("/find/{id}")
+    public ResponseEntity findById(@PathVariable("id") Long id){
+
+        Optional<Client> client = clienteService.findById(id);
+        return client.isPresent()?
+                ResponseEntity.ok(client.get()):
+                ResponseEntity.notFound().build();
+
     }
 }
 
