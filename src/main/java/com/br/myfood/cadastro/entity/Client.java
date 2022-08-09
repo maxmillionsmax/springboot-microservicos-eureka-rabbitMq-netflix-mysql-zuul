@@ -1,6 +1,6 @@
 package com.br.myfood.cadastro.entity;
 
-import com.br.myfood.cadastro.dto.ClienteDto;
+import com.br.myfood.cadastro.dto.ClientDto;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 
@@ -18,7 +18,7 @@ public class Client {
     private String email;
     private String password;
 
-    public static Client create(ClienteDto clienteDto){
+    public static Client create(ClientDto clienteDto){
         return new ModelMapper().map(clienteDto, Client.class);
     }
 }

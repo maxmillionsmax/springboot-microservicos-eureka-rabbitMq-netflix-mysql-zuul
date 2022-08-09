@@ -1,8 +1,6 @@
 package com.br.myfood.cadastro.controller;
 
-import com.br.myfood.cadastro.dto.ClienteDto;
 import com.br.myfood.cadastro.dto.RestaurantDto;
-import com.br.myfood.cadastro.entity.Client;
 import com.br.myfood.cadastro.entity.Restaurant;
 import com.br.myfood.cadastro.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
