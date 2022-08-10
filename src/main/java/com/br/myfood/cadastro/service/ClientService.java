@@ -1,6 +1,8 @@
 package com.br.myfood.cadastro.service;
 
+import com.br.myfood.cadastro.dto.ClientOrderDto;
 import com.br.myfood.cadastro.entity.Client;
+import com.br.myfood.cadastro.message.ClientSendMessage;
 import com.br.myfood.cadastro.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,14 +13,19 @@ import java.util.Optional;
 public class ClientService {
 
     private final ClientRepository clientRepository;
+    private final ClientSendMessage clientSendMessage;
+
 
     @Autowired
-    public ClientService(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository, ClientSendMessage clientSendMessage) {
         this.clientRepository = clientRepository;
+        this.clientSendMessage = clientSendMessage;
     }
 
     public Client insertClient(Client client){
-        return clientRepository.save(client);
+        Client newClient =  clientRepository.save(client);
+        clientSendMessage.sendMessage(new ClientOrderDto(newClient.getId()));
+        return newClient;
     }
 
     public Client updateClient(Client client){
